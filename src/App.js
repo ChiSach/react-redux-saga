@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+
+import { divAction } from "./actions/divAction";
+import { plusAction } from "./actions/plusAction";
 
 function App() {
+
+  const count = useSelector(state => state.count);
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {"Count: " + count}
+      <br/>
+      <button onClick={() => dispatch(plusAction)}>Plus</button>
+      <span>   </span>
+      <button onClick={() => dispatch(divAction)}>Div</button>
+      <span>   </span> 
+      <button onClick={() => dispatch({type: "START"})}>START</button>
+      <span>   </span>
+      <button onClick={() => dispatch({type: "END"})}>END</button>
     </div>
   );
 }
